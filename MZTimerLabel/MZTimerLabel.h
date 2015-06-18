@@ -1,10 +1,10 @@
 //
-//  MZTimerLabel.h
+//  MZTimerLabelWatch.h
 //  Version 0.5.1
 //  Created by MineS Chan on 2013-10-16
 //  Updated 2014-12-15
 
-// This code is distributed under the terms and conditions of the MIT license. 
+// This code is distributed under the terms and conditions of the MIT license.
 
 // Copyright (c) 2014 MineS Chan
 //
@@ -26,56 +26,56 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+#import <WatchKit/WatchKit.h>
 
 
 /**********************************************
- MZTimerLabel TimerType Enum
+ MZTimerLabelWatch TimerType Enum
  **********************************************/
 typedef enum{
-    MZTimerLabelTypeStopWatch,
-    MZTimerLabelTypeTimer
-}MZTimerLabelType;
+    MZTimerLabelWatchTypeStopWatch,
+    MZTimerLabelWatchTypeTimer
+}MZTimerLabelWatchType;
 
 /**********************************************
  Delegate Methods
  @optional
- 
+
  - timerLabel:finshedCountDownTimerWithTimeWithTime:
-    ** MZTimerLabel Delegate method for finish of countdown timer
+    ** MZTimerLabelWatch Delegate method for finish of countdown timer
 
  - timerLabel:countingTo:timertype:
-    ** MZTimerLabel Delegate method for monitering the current counting progress
- 
+    ** MZTimerLabelWatch Delegate method for monitering the current counting progress
+
  - timerlabel:customTextToDisplayAtTime:
-    ** MZTimerLabel Delegate method for overriding the text displaying at the time, implement this for your very custom display formmat
+    ** MZTimerLabelWatch Delegate method for overriding the text displaying at the time, implement this for your very custom display formmat
 **********************************************/
- 
-@class MZTimerLabel;
-@protocol MZTimerLabelDelegate <NSObject>
+
+@class MZTimerLabelWatch;
+@protocol MZTimerLabelWatchDelegate <NSObject>
 @optional
--(void)timerLabel:(MZTimerLabel*)timerLabel finshedCountDownTimerWithTime:(NSTimeInterval)countTime;
--(void)timerLabel:(MZTimerLabel*)timerLabel countingTo:(NSTimeInterval)time timertype:(MZTimerLabelType)timerType;
--(NSString*)timerLabel:(MZTimerLabel*)timerLabel customTextToDisplayAtTime:(NSTimeInterval)time;
+-(void)timerLabel:(MZTimerLabelWatch*)timerLabel finshedCountDownTimerWithTime:(NSTimeInterval)countTime;
+-(void)timerLabel:(MZTimerLabelWatch*)timerLabel countingTo:(NSTimeInterval)time timertype:(MZTimerLabelWatchType)timerType;
+-(NSString*)timerLabel:(MZTimerLabelWatch*)timerLabel customTextToDisplayAtTime:(NSTimeInterval)time;
 @end
 
 /**********************************************
- MZTimerLabel Class Defination
+ MZTimerLabelWatch Class Defination
  **********************************************/
 
-@interface MZTimerLabel : UILabel;
+@interface MZTimerLabelWatch : NSObject;
 
 /*Delegate for finish of countdown timer */
-@property (nonatomic,weak) id<MZTimerLabelDelegate> delegate;
+@property (nonatomic,weak) id<MZTimerLabelWatchDelegate> delegate;
 
 /*Time format wish to display in label*/
 @property (nonatomic,copy) NSString *timeFormat;
 
-/*Target label obejct, default self if you do not initWithLabel nor set*/
-@property (nonatomic,strong) UILabel *timeLabel;
+/*Target label object*/
+@property (nonatomic,strong) WKInterfaceLabel *timeLabel;
 
 /*Type to choose from stopwatch or timer*/
-@property (assign) MZTimerLabelType timerType;
+@property (assign) MZTimerLabelWatchType timerType;
 
 /*Is The Timer Running?*/
 @property (assign,readonly) BOOL counting;
@@ -92,17 +92,17 @@ typedef enum{
 
 
 /*--------Init methods to choose*/
--(id)initWithTimerType:(MZTimerLabelType)theType;
--(id)initWithLabel:(UILabel*)theLabel andTimerType:(MZTimerLabelType)theType;
--(id)initWithLabel:(UILabel*)theLabel;
-/*--------designated Initializer*/
--(id)initWithFrame:(CGRect)frame label:(UILabel*)theLabel andTimerType:(MZTimerLabelType)theType;
+-(id)initWithLabel:(WKInterfaceLabel*)theLabel andTimerType:(MZTimerLabelWatchType)theType;
+-(id)initWithLabel:(WKInterfaceLabel*)theLabel;
+
 
 /*--------Timer control methods to use*/
 -(void)start;
+
 #if NS_BLOCKS_AVAILABLE
 -(void)startWithEndingBlock:(void(^)(NSTimeInterval countTime))end; //use it if you are not going to use delegate
 #endif
+
 -(void)pause;
 -(void)reset;
 
@@ -119,9 +119,4 @@ typedef enum{
 - (NSTimeInterval)getCountDownTime;
 
 
-
-
-
 @end
-
-
