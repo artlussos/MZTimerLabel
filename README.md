@@ -6,11 +6,13 @@ MZTimerLabel
 ![Platforms](https://cocoapod-badges.herokuapp.com/p/MZTimerLabel/badge.png)
 [![Cocoapod Latest Version](http://img.shields.io/cocoapods/v/MZTimerLabel.svg?style=flat)](https://cocoapods.org/?q=MZTimerLabel)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Downloads with CocoaPods](https://img.shields.io/cocoapods/dt/MZTimerLabel.svg)](https://cocoapods.org/pods/MZTimerLabel)
+
 
 <img align="center" src="https://raw.github.com/mineschan/MZTimerLabel/master/demo.gif" alt="ScreenShot" width="300">
 <img align="center" src="https://raw.github.com/mineschan/MZTimerLabel/master/MZTimerLabel_Demo2.png" alt="ScreenShot2" width="300">
 
-###Purpose
+### Purpose
 
 MZTimerLabel is a UILabel subclass, which is a handy way to use UILabel as a countdown timer or stopwatch just like that in Apple Clock App with just __2 lines of code__. MZTimerLabel also provides delegate method for you to define the action when the timer finished.
 
@@ -18,29 +20,33 @@ Author: [MineS Chan](https://github.com/mineschan/) and awesome [contributors](h
 
 _Remark: This is my first iOS plugin project on github, please accept my apologize if any bad coding._
 
-###Requirements
+### Requirements
 * ARC
 * iOS 5.0+
 
-###Installations
+### Installations
 
-####Manual
+#### Manual
 
 1. Download or clone MZTimerLabel, add `MZTimerLabel.h` and `MZTimerLabel.m` source files into your project.
 2. `#import "MZTimerLabel.h"` whereever you need it.
 
-####CocoaPods
+#### CocoaPods
 
 (Unfamiliar with [CocoaPods](http://cocoapods.org/) yet? It's a dependency management tool for iOS and Mac, check it out!)
 
-1. Add `pod 'MZTimerLabel'` to your podfiles
+```
+pod 'MZTimerLabel'
+```
 
-####Carthage
+#### Carthage
 Another dependency manager is [Carthage](http://github.com/Carthage/Carthage), which does not have a centralized repository.
 
-1. Add `github "mineschan/MZTimerLabel"` to your `Cartfile`
+```
+github "mineschan/MZTimerLabel"
+```
 
-###Easy Example
+### Easy Example
 
 To use MZTimerLabel as a stopwatch and counter, you need only __2 lines__.
  ```objective-c
@@ -57,7 +63,7 @@ Easy? If you are looking for a timer, things is just similar.
 
 Now the timer will start counting from 60 to 0 ;)
 
-###Custom Appearance
+### Custom Appearance
 
 As MZTimerLabel is a UILabel subclass, you can directly allocate it as a normal UILabel and customize `timeLabel` property just like usual.
 
@@ -76,7 +82,7 @@ MZTimerLabel uses `00:00:00 (HH:mm:ss)` as time format, if you prefer using anot
 
  
  
-###Control the timer
+### Control the timer
 
 You can start,pause,reset your timer with your custom control, set your control up and call these methods:
 
@@ -110,11 +116,11 @@ And if you want to have information of the timer, here is how.
 - (NSTimeInterval)getCountDownTime;  
 ```
 
-###Timer Finish Handling
+### Timer Finish Handling
 
 Usually when you need a timer, you need to deal with it after it finished. Following are 2 examples showing how to do it using `delegate` and `block` methods.
 
-####Delegate
+#### Delegate
 
 First, set the delegate of the timer label.
 
@@ -132,7 +138,7 @@ Finally, implement the delegate method `timerLabel:finshedCountDownTimerWithTime
  }
  ```
  
-####Blocks
+#### Blocks
  
  Block is a very convenient way to handle the callbacks, MZTimerLabel makes your life even easier.
  
@@ -157,11 +163,11 @@ Finally, implement the delegate method `timerLabel:finshedCountDownTimerWithTime
 ```
 
  
-###More Examples
+### More Examples
 
 Please check the demo project I provided, with well explained example code inside.
  
-###License
+### License
 This code is distributed under the terms and conditions of the [MIT license](LICENSE). 
 
 

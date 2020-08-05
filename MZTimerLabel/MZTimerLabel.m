@@ -34,7 +34,6 @@
 #define kDefaultFireIntervalNormal  0.1
 #define kDefaultFireIntervalHighUse  0.01
 #define kDefaultTimerType MZTimerLabelTypeStopWatch
-
 @interface MZTimerLabel(){
     
     NSTimeInterval timeUserValue;
@@ -57,6 +56,12 @@
 @implementation MZTimerLabel
 
 @synthesize timeFormat = _timeFormat;
+
+- (void)dealloc {
+    if (_timer) {
+        [_timer invalidate];
+    }
+}
 
 - (id)initWithTimerType:(MZTimerLabelType)theType {
     return [self initWithFrame:CGRectZero label:nil andTimerType:theType];
@@ -347,8 +352,18 @@
         }else{
             self.timeLabel.text = [self.dateFormatter stringFromDate:timeToShow];
         }
-    }else{
+    }else if([_delegate respondsToSelector:@selector(timerLabel:customAttributedTextToDisplayAtTime:)]){
+        NSTimeInterval atTime = (_timerType == MZTimerLabelTypeStopWatch) ? timeDiff : ((timeUserValue - timeDiff) < 0 ? 0 : (timeUserValue - timeDiff));
+        NSAttributedString *customtext = [_delegate timerLabel:self customAttributedTextToDisplayAtTime:atTime];
+        if ([customtext length]) {
+            self.timeLabel.attributedText = customtext;
+        }else{
+            self.timeLabel.text = [self.dateFormatter stringFromDate:timeToShow];
+        }
         
+    }else{
+
+    
         if(_shouldCountBeyondHHLimit) {
             //0.4.7 added---start//
             NSString *originalTimeFormat = _timeFormat;
@@ -364,7 +379,23 @@
             self.dateFormatter.dateFormat = originalTimeFormat;
             //0.4.7 added---endb//
         }else{
-            self.timeLabel.text = [self.dateFormatter stringFromDate:timeToShow];
+            if(self.textRange.length > 0){
+                if(self.attributedDictionaryForTextInRange){
+                    
+                    NSAttributedString *attrTextInRange = [[NSAttributedString alloc] initWithString:[self.dateFormatter stringFromDate:timeToShow] attributes:self.attributedDictionaryForTextInRange];
+                    
+                    NSMutableAttributedString *attributedString;
+                    attributedString = [[NSMutableAttributedString alloc]initWithString:self.text];
+                    [attributedString replaceCharactersInRange:self.textRange withAttributedString:attrTextInRange];
+                    self.timeLabel.attributedText = attributedString;
+        
+                } else {
+                    NSString *labelText = [self.text stringByReplacingCharactersInRange:self.textRange withString:[self.dateFormatter stringFromDate:timeToShow]];
+                    self.timeLabel.text = labelText;
+                }
+            } else {
+                self.timeLabel.text = [self.dateFormatter stringFromDate:timeToShow];
+            }
         }
     }
     
