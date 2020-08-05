@@ -4,7 +4,7 @@
 //  Created by MineS Chan on 2013-10-16
 //  Updated 2014-12-15
 
-// This code is distributed under the terms and conditions of the MIT license. 
+// This code is distributed under the terms and conditions of the MIT license.
 
 // Copyright (c) 2014 MineS Chan
 //
@@ -40,17 +40,17 @@ typedef enum{
 /**********************************************
  Delegate Methods
  @optional
- 
+
  - timerLabel:finshedCountDownTimerWithTimeWithTime:
     ** MZTimerLabel Delegate method for finish of countdown timer
 
  - timerLabel:countingTo:timertype:
     ** MZTimerLabel Delegate method for monitering the current counting progress
- 
+
  - timerlabel:customTextToDisplayAtTime:
     ** MZTimerLabel Delegate method for overriding the text displaying at the time, implement this for your very custom display formmat
 **********************************************/
- 
+
 @class MZTimerLabel;
 @protocol MZTimerLabelDelegate <NSObject>
 @optional
@@ -129,5 +129,3 @@ typedef enum{
 
 
 @end
-
-

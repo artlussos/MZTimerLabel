@@ -75,13 +75,13 @@ As MZTimerLabel is a UILabel subclass, you can directly allocate it as a normal 
     [self.view addSubview:redStopwatch];
     [redStopwatch start];
  ```
- 
+
 MZTimerLabel uses `00:00:00 (HH:mm:ss)` as time format, if you prefer using another format such as including milliseconds.Your can set your time format like below.
 
 `timerExample4.timeFormat = @"HH:mm:ss SS";`
 
- 
- 
+
+
 ### Control the timer
 
 You can start,pause,reset your timer with your custom control, set your control up and call these methods:
@@ -113,7 +113,7 @@ And if you want to have information of the timer, here is how.
 
 - (NSTimeInterval)getTimeCounted;    //see example #3
 - (NSTimeInterval)getTimeRemaining;  //see example #3
-- (NSTimeInterval)getCountDownTime;  
+- (NSTimeInterval)getCountDownTime;
 ```
 
 ### Timer Finish Handling
@@ -137,38 +137,38 @@ Finally, implement the delegate method `timerLabel:finshedCountDownTimerWithTime
     //time is up, what should I do master?
  }
  ```
- 
+
 #### Blocks
- 
+
  Block is a very convenient way to handle the callbacks, MZTimerLabel makes your life even easier.
- 
+
  ```objective-c
- 
+
     MZTimerLabel *timer = [[MZTimerLabel alloc] initWithLabel:aUILabel andTimerType:MZTimerLabelTypeTimer];
-    [timer3 setCountDownTime:60]; 
+    [timer3 setCountDownTime:60];
     [timer startWithEndingBlock:^(NSTimeInterval countTime) {
         //oh my gosh, it's awesome!!
     }];
- 
+
  ```
- 
+
  Or set it seperately
- 
+
  ```
-    [timer3 setCountDownTime:60]; 
+    [timer3 setCountDownTime:60];
     timer.endedBlock = ^(NSTimeInterval countTime) {
         //oh my gosh, it's awesome!!
     };
     [timer start];
 ```
 
- 
+
 ### More Examples
 
 Please check the demo project I provided, with well explained example code inside.
- 
+
 ### License
-This code is distributed under the terms and conditions of the [MIT license](LICENSE). 
+This code is distributed under the terms and conditions of the [MIT license](LICENSE).
 
 
 ### What's coming up next?
